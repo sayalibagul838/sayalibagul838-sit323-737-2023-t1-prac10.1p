@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudp
+  template:
+    metadata:
+      labels:
+        app: cloudp
+    spec:
+      containers:
+        - image: cloudp
+          name: cloudp
+        
+          volumeMounts:
+            - mountPath: /data/db
+              name: cloudp-volume
+      volumes:
+        - name: cloudp-volume
+          persistentVolumeClaim:
+            claimName: cloudp-pvc

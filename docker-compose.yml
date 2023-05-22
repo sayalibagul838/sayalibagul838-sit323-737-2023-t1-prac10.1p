@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  first-service:
+    build: H:\Deakin\SIT737_Cloud\programs\pass_task
+    volumes:
+       - ./pass_task:/usr/src/pass_task
+    ports:
+       - 3000:3000 
+    restart: always
+    healthcheck:
+      test: curl --fail http://localhost || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
+   
